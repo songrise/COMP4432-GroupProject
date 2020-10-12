@@ -28,7 +28,7 @@ X_train, X_val, Y_train, Y_val = train_test_split(
 # %% model setup
 # clf = RandomForestClassifier(n_estimators=200, min_impurity_split=4, verbose=1)
 clf = AdaBoostClassifier(
-    base_estimator=DecisionTreeClassifier(min_samples_split=4), random_state=int(time.time()))
+    base_estimator=DecisionTreeClassifier(max_depth=3), random_state=int(time.time()))
 clf.fit(X_train, Y_train)
 clf.score(X_val, Y_val)
 # save model
@@ -40,7 +40,7 @@ clf.score(X_val, Y_val)
 result = clf.predict(test[:, 1:])
 result = np.c_[np.arange(250, 20000).reshape(19750,), result]  # id column
 
-np.savetxt("..\\out\\predictionNN_{}.csv".format(time.asctime(time.localtime(time.time())).replace(":", "_")), result, fmt="%.d",
+np.savetxt("..\\out\\predictionAda_{}.csv".format(time.asctime(time.localtime(time.time())).replace(":", "_")), result, fmt="%.d",
            delimiter=",", header="id,target")
 
 print("Done in {} sec.".format(time.time()-start))
