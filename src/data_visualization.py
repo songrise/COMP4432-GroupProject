@@ -15,8 +15,6 @@ import matplotlib.pyplot as plt
 
 # %% load data
 train = pd.read_csv("..\\data\\train.csv")
-
-
 plt.figure(figsize=(16, 6))
 features = train.columns.values[2:302]
 plt.title("Distribution of mean values per row in the train set")
