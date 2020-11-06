@@ -30,7 +30,6 @@ plt.show()
 def plot_feature_distribution(df1, df2, label1, label2, features):
     i = 0
     sns.set_style('whitegrid')
-    plt.title("Distribution of features")
     plt.figure()
     fig, ax = plt.subplots(10, 10, figsize=(18, 22))
 
