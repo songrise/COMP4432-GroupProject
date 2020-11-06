@@ -3,7 +3,7 @@
 # @Author    : Ruixiang JIANG (Songrise)
 # @Time      : 2020-11-04
 # @Github    ：https://github.com/songrise
-# @Descriptions: NOTE: this is derived from https://www.kaggle.com/gpreda/overfitting-the-private-leaderboard
+# @Descriptions: NOTE: some codes derived from https://www.kaggle.com/gpreda/overfitting-the-private-leaderboard
 
 # %% import modules
 import numpy as np
@@ -30,6 +30,7 @@ plt.show()
 def plot_feature_distribution(df1, df2, label1, label2, features):
     i = 0
     sns.set_style('whitegrid')
+    plt.title("Distribution of features")
     plt.figure()
     fig, ax = plt.subplots(10, 10, figsize=(18, 22))
 
@@ -50,11 +51,10 @@ t1 = train.loc[train['target'] == 1]
 features = train.columns.values[2:102]
 plot_feature_distribution(t0, t1, '0', '1', features)
 
-# %% Data correlation
-correlations = train[features].corr().abs(
-).unstack().sort_values(kind="quicksort").reset_index()
-correlations = correlations[correlations['level_0'] != correlations['level_1']]
-correlations.head(10)
-correlations.tail(10)
 
-# %%
+# %% Data correlation
+correlations = train[features].corr()
+for i in range(correlations.shape[0]):
+    correlations['{}'.format(i)]['{}'.format(i)]= 0
+plt.title("Correlations between attributes")
+sns.distplot(correlations,hist=True,rug=True)
