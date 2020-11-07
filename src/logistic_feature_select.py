@@ -18,9 +18,9 @@ def warn(*args, **kwargs):
 warnings.warn = warn
 
 
-test = pd.read_csv('new/test.csv')
+test = pd.read_csv('..\\data\\test.csv')
 test = test.drop(['id'], axis=1)
-train = pd.read_csv('new/train.csv')
+train = pd.read_csv('..\\data\\train.csv')
 
 
 # LogisticRegression
@@ -106,7 +106,7 @@ for train_index, val_index in StratifiedShuffleSplit(n_splits=1000, test_size=0.
 # get submission
 # ret = model.predict(test.drop("id",axis=1))
 ret = predictions.mean(axis=1)
-sub = pd.read_csv('sample_submission.csv')
+sub = pd.read_csv('..\\data\\sample_submission.csv')
 sub['target'] = ret
 # sub['target'] = sub['target'].astype(int)
-sub.to_csv('submission-'+str(time.time())+'.csv',index=False) 
+sub.to_csv('..\\out\\submission-'+str(time.time())+'.csv',index=False) 
