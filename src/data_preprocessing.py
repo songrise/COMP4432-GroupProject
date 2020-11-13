@@ -50,8 +50,9 @@ X_res, y_res = sm.fit_resample(X_train, y_train)
 
 
 trainDF = pd.DataFrame(X_res)
-dim_reduced = TruncatedSVD(n_components=2, random_state=34)
-dim_reduced_result = pd.DataFrame(dim_reduced.fit_transform(X_res))
+
+dim_reduction = sklearn.decomposition.TruncatedSVD(n_components=2, random_state=34)
+dim_reduced_result = pd.DataFrame(dim_reduction.fit_transform(X_res))
 
 
 plt.title("Train data after Boarderline SMOTE")
