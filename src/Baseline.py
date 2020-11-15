@@ -3,7 +3,7 @@
 # @Author    : Ruixiang JIANG (Songrise)
 # @Time      : 2020-10-12
 # @Github    ：https://github.com/songrise
-# @Descriptions: test
+# @Descriptions: The very first model we tried. It is not the logistic regression mentioned in report
 
 # %% import modules
 from sklearn.ensemble import AdaBoostClassifier

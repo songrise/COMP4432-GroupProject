@@ -4,7 +4,7 @@ import seaborn as sns
 import numpy as np
 import pandas as pd
 from imblearn import over_sampling
-from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.ensemble import RandomForestClassifier
 import sklearn.decomposition
 
 
@@ -19,7 +19,7 @@ target = train['target']
 
 TOP_FEATURES = 15
 
-forest = ExtraTreesClassifier(n_estimators=250, max_depth=5, random_state=1)
+forest = RandomForestClassifier(n_estimators=500, max_depth=5, random_state=1)
 forest.fit(train[labels], train['target'])
 
 importances = forest.feature_importances_
@@ -31,7 +31,7 @@ indices = np.argsort(importances)[::-1]
 indices = indices[:TOP_FEATURES]
 
 plt.figure()
-plt.title('Top feature importances [2]')
+plt.title('Random Tree feature importances')
 plt.bar(
     range(TOP_FEATURES),
     importances[indices],
@@ -51,12 +51,11 @@ X_res, y_res = sm.fit_resample(X_train, y_train)
 
 trainDF = pd.DataFrame(X_res)
 
-dim_reduction = sklearn.decomposition.TruncatedSVD(n_components=2, random_state=34)
+dim_reduction = sklearn.decomposition.TruncatedSVD(
+    n_components=2, random_state=34)
 dim_reduced_result = pd.DataFrame(dim_reduction.fit_transform(X_res))
 
 
 plt.title("Train data after Boarderline SMOTE")
 
 sns.scatterplot(x=dim_reduced_result[0], y=dim_reduced_result[1], hue=y_res)
-
-# %%
